@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <variant>
+#include <functional>
 
 
 namespace common
@@ -60,5 +61,20 @@ namespace common
             inputItem.substr(distanceBeginIndex)
         };
 
+    }
+
+    std::vector<std::string> pythonStyleFilter(
+        std::function<bool (std::string, int matchCriteria, int charIndex)> mappedFunc,
+        std::vector<std::string> vect,
+        int matchCriteria,
+        int charIndex
+    ){
+        std::vector<std::string> itemsToKeep;
+        for (int i = 0; i < vect.size(); i++){
+            if (mappedFunc(vect[i], matchCriteria, charIndex)){
+                itemsToKeep.push_back(vect[i]);
+            }
+        }
+        return itemsToKeep;
     }
 }
