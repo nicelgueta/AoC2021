@@ -1,16 +1,18 @@
 #pragma once
+#ifndef _UTILS_H
+#define _UTILS_H
 
 #include <string>
+#include <stdio.h>
 #include <fstream>
 #include <vector>
 #include <variant>
 #include <functional>
 
-
 namespace common
 {
 
-    std::vector<std::string> readInputs(std::string fileName){
+    inline std::vector<std::string> readInputs(std::string fileName){
 
         std::string inputTextItem;
         std::vector<std::string> inputs;
@@ -26,7 +28,7 @@ namespace common
         return inputs;
     };
 
-    std::vector<int> readInputsAsInt(std::string fileName){
+    inline std::vector<int> readInputsAsInt(std::string fileName){
 
         std::string inputTextItem;
         std::vector<int> inputs;
@@ -42,7 +44,7 @@ namespace common
         return inputs;
     };
 
-    int sumVector(std::vector<int> vect){
+    inline int sumVector(std::vector<int> vect){
         int s = 0;
         for (int i = 0; i < vect.size(); i++){
             s += vect[i];
@@ -50,10 +52,10 @@ namespace common
         return s;
     };
 
-    std::vector<std::string> splitInput(
+    inline std::vector<std::string> splitInput(
         std::string inputItem, 
         std::string delimiter = " "
-    ){
+        ){
         int wordEndIndex = inputItem.find(delimiter);
         int distanceBeginIndex = wordEndIndex + delimiter.length();
         return {
@@ -61,9 +63,9 @@ namespace common
             inputItem.substr(distanceBeginIndex)
         };
 
-    }
+    };
 
-    std::vector<std::string> pythonStyleFilter(
+    inline std::vector<std::string> pythonStyleFilter(
         std::function<bool (std::string, int matchCriteria, int charIndex)> mappedFunc,
         std::vector<std::string> vect,
         int matchCriteria,
@@ -76,5 +78,23 @@ namespace common
             }
         }
         return itemsToKeep;
+    };
+
+    inline std::vector<std::string> strSubVector(
+        std::vector<std::string> vect,
+        int start = 0,
+        int end = -1
+    ){  
+        end = end == -1 ? vect.size() : end;
+        int subVectorSize = end - start;
+        std::vector<std::string> subVector;
+
+        for (int j = 0; j < subVectorSize; j++){
+            subVector.push_back(vect[start + j]);
+        }
+        return subVector;
     }
+    
 }
+
+#endif
