@@ -2,7 +2,7 @@
 
 Repo for Advent of Code solutions 2021
 
-Decided to try out in C++, given it's a language I'm pretty weak in.
+Decided to try some of the easier ones out in C++, given it's a language I'm pretty new to
 
 Advent of Code link: https://adventofcode.com/
 
