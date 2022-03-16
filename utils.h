@@ -8,9 +8,20 @@
 #include <vector>
 #include <variant>
 #include <functional>
+#include <regex>
+
 
 namespace common
 {
+
+
+    std::string ltrim(const std::string &s) {
+        return std::regex_replace(s, std::regex("^\\s+"), std::string(""));
+    }
+ 
+    std::string rtrim(const std::string &s) {
+        return std::regex_replace(s, std::regex("\\s+$"), std::string(""));
+    }
 
     inline std::vector<std::string> readInputs(std::string fileName){
 
@@ -53,14 +64,17 @@ namespace common
     };
 
     inline std::vector<std::string> splitInput(
-        std::string inputItem, 
-        std::string delimiter = " "
+            std::string inputItem, 
+            std::string delimiter = " ",
+            bool trim = false
         ){
         int wordEndIndex = inputItem.find(delimiter);
         int distanceBeginIndex = wordEndIndex + delimiter.length();
+        std::string item1 = inputItem.substr(0, wordEndIndex);
+        std::string item2 = inputItem.substr(distanceBeginIndex);
         return {
-            inputItem.substr(0, wordEndIndex),
-            inputItem.substr(distanceBeginIndex)
+            trim ? ltrim(rtrim(item1)) : item1,
+            trim ? ltrim(rtrim(item2)) : item2
         };
 
     };
