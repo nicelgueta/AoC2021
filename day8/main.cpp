@@ -7,9 +7,9 @@ using namespace std;
 
 bool TEST = true;
 
-string fileName = TEST ? "test_input.txt" : "inputs.txt";
 
 vector<pair<vector<string>,vector<string>>> getInputs () {
+    string fileName = TEST ? "test_input.txt" : "inputs.txt";
     vector<string> inputs = common::readInputs(fileName);
     vector<pair<vector<string>, vector<string>>> inputSplits = {};
     for (string item: inputs){
@@ -27,6 +27,8 @@ int main ()
 {
     
     // first part - how many times do 1 (2), 4(4), 7(3), 8(7) appear
-    cout << getInputs();
+
+    vector<pair<vector<string>,vector<string>>> inputs = getInputs();
+
 
 }

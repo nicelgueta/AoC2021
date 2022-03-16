@@ -10,7 +10,6 @@
 #include <functional>
 #include <regex>
 
-
 namespace common
 {
 
@@ -68,14 +67,24 @@ namespace common
             std::string delimiter = " ",
             bool trim = false
         ){
+        std::vector<std::string> ret = {};
+        int i = 0;
         int wordEndIndex = inputItem.find(delimiter);
         int distanceBeginIndex = wordEndIndex + delimiter.length();
-        std::string item1 = inputItem.substr(0, wordEndIndex);
-        std::string item2 = inputItem.substr(distanceBeginIndex);
-        return {
-            trim ? ltrim(rtrim(item1)) : item1,
-            trim ? ltrim(rtrim(item2)) : item2
-        };
+        while (wordEndIndex < inputItem.length()){
+            string _item = inputItem.substr(0, wordEndIndex);
+            ret.push_back(trim ? ltrim(rtrim(_item)) : _item);
+            // change input item
+            inputItem = inputItem.substr(distanceBeginIndex);
+            wordEndIndex = inputItem.find(delimiter);
+            distanceBeginIndex = wordEndIndex + delimiter.length();
+        }
+        // final item
+
+        ret.push_back(trim ? ltrim(rtrim(inputItem)) : inputItem);
+
+
+        return ret;
 
     };
 
